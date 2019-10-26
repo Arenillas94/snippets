@@ -1,0 +1,31 @@
+
+
+/* 1- FLEX HACK IF YOU WANT "justify-content: flex-start" WITH THE MARGIN ON "space-between" */
+
+/* use the nth-child selector and simply calculate the needed left margin on all items but the first in each row. */
+/*The calculation is done by remove the sum of the items width (16% * 6)) from the parent's full width (100% -, and then divide what's left with the amount of gaps / 5)*/
+/*.item:not(:nth-child(6n+1)) will select all items but every 6th, starting from the 1st (e.g. 1st, 7th, 13th, and so on).*/
+/*If the item count in each row will change, use a media query to adjust the 6n+1 selector and calculation values.*/
+
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.item {
+  flex: 0 0 16%; /* 6 items per line leaving some for margin*/
+  border: 1px solid black;
+  box-sizing: border-box;
+}
+
+.item:not(:nth-child(6n+1)) { 
+  margin-left: calc( (100% - (16% * 6)) / 5 );    /*  6 item per line  */
+}
+
+.item.col4:not(:nth-child(4n+1)) {
+  margin-left: calc( (100% - (23.5% * 4)) / 3 );  /* 4 items per line  */
+}
+	.item.col3:not(:nth-child(3n+1)) {
+  margin-left: calc( (100% - (32% * 3)) / 2 );  /*  3 items per line */
+}
